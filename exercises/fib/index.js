@@ -9,16 +9,57 @@
 //   fib(4) === 3
 
 function fib(n) {
-    const result = [0, 1]
-
-    for (let i = 2; i <= n; i++) {
-        const a = result[i - 1]
-        const b = result[i - 2]
-
-        result.push(a + b)
+    // option #2 with recursion
+    // exponential run time, takes much more time to run
+    // for every increase of n, there will be a dramatic increase in run time
+    // run time can be improved with memoization (see below)
+    if (n < 2) {
+        return n;
     }
 
-    return result[n]
+    return fib(n - 1) + fib(n - 2)
 }
 
 module.exports = fib;
+
+// linear run time
+
+// function fib(n) {
+//     const result = [0, 1]
+
+//     for (let i = 2; i <= n; i++) {
+//         const a = result[i - 1]
+//         const b = result[i - 2]
+
+//         result.push(a + b)
+//     }
+
+//     return result[n]
+// }
+
+
+// improve recursion version with memoization
+
+// function memoize(fn) {
+//     const cache = {}
+//     return function(...args) {
+//         if (cache[args]) {
+//             return cache[args]
+//         }
+
+//         const result = fn.apply(this, args)
+//         cache[args] = result
+
+//         return result
+//     }
+// }
+
+// function slowFib(n) {
+//     if (n < 2) {
+//         return n;
+//     }
+
+//     return fib(n - 1) + fib(n - 2)
+// }
+
+// const fib = memoize(slowFib)
